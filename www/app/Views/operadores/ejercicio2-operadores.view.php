@@ -1,0 +1,1 @@
+<p> El precio por hora es <?php echo $hPrice?>, se han trabajado <?php echo $hWorked?> horas por lo que se pagarán <?php echo $hToBePaid?>€</p>

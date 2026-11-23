@@ -1,0 +1,1 @@
+<p>El string "<?php echo $string?>" tiene <?php echo $stringNumberOfCaracters?> caracteres y <?php echo $stringNumberOfWords?> palabras</p>

@@ -1,0 +1,1 @@
+<p><?php echo $kmAnHour?> km/h se traducen a <?php echo $mPerSecond?> metros por segundo</p>

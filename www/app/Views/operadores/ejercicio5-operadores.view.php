@@ -1,0 +1,1 @@
+<p>El total a pagar por la estancia en temporada alta es <?php echo $priceToBePaidHighSeason?>€ . Y el total a pagar por la estancia en temporada baja es <?php echo $priceToBePaidLowSeason?>€</p>

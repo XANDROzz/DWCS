@@ -1,0 +1,1 @@
+<p><?php if($num1%$num2 === 0){echo "el primer número es divisible por el segundo";}?></p>

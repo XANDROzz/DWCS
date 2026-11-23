@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="LaravelPint">
+    <laravel_pint_settings>
+      <laravel_pint_by_interpreter asDefaultInterpreter="true" interpreter_id="86288cdd-faf0-43ab-baaf-27d0f5e41c07">
+        <option name="timeout" value="30000" />
+      </laravel_pint_by_interpreter>
+    </laravel_pint_settings>
+  </component>
   <component name="MessDetector">
     <phpmd_settings>
       <phpmd_by_interpreter asDefaultInterpreter="true" interpreter_id="86288cdd-faf0-43ab-baaf-27d0f5e41c07" timeout="30000" />
@@ -13,8 +20,13 @@
   </component>
   <component name="PHPCodeSnifferOptionsConfiguration">
     <option name="codingStandard" value="PSR12" />
-    <option name="highlightLevel" value="WARNING" />
+    <option name="highlightLevel" value="INFO" />
     <option name="transferred" value="true" />
+  </component>
+  <component name="PhpCSFixer">
+    <phpcsfixer_settings>
+      <phpcs_fixer_by_interpreter asDefaultInterpreter="true" interpreter_id="86288cdd-faf0-43ab-baaf-27d0f5e41c07" timeout="30000" />
+    </phpcsfixer_settings>
   </component>
   <component name="PhpCodeSniffer">
     <phpcs_settings>
@@ -55,14 +67,14 @@
   <component name="PhpInterpretersPhpInfoCache">
     <phpInfoCache>
       <interpreter name="php">
-        <phpinfo binary_type="PHP" php_cli="/usr/local/bin/php" path_separator=":" version="8.0.30">
-          <additional_php_ini>/usr/local/etc/php/conf.d/custom-php.ini, /usr/local/etc/php/conf.d/docker-php-ext-bcmath.ini, /usr/local/etc/php/conf.d/docker-php-ext-decimal.ini, /usr/local/etc/php/conf.d/docker-php-ext-gd.ini, /usr/local/etc/php/conf.d/docker-php-ext-intl.ini, /usr/local/etc/php/conf.d/docker-php-ext-mysqli.ini, /usr/local/etc/php/conf.d/docker-php-ext-pdo_mysql.ini, /usr/local/etc/php/conf.d/docker-php-ext-sodium.ini, /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini, /usr/local/etc/php/conf.d/docker-php-ext-zip.ini</additional_php_ini>
+        <phpinfo binary_type="PHP" php_cli="/usr/local/bin/php" path_separator=":" version="8.3.33">
+          <additional_php_ini>/usr/local/etc/php/conf.d/custom-php.ini, /usr/local/etc/php/conf.d/docker-php-ext-bcmath.ini, /usr/local/etc/php/conf.d/docker-php-ext-decimal.ini, /usr/local/etc/php/conf.d/docker-php-ext-gd.ini, /usr/local/etc/php/conf.d/docker-php-ext-intl.ini, /usr/local/etc/php/conf.d/docker-php-ext-mysqli.ini, /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini, /usr/local/etc/php/conf.d/docker-php-ext-pdo_mysql.ini, /usr/local/etc/php/conf.d/docker-php-ext-sodium.ini, /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini, /usr/local/etc/php/conf.d/docker-php-ext-zip.ini</additional_php_ini>
           <configuration_file />
           <configuration_options>
             <configuration_option name="include_path" value=".:/usr/local/lib/php" />
           </configuration_options>
           <debuggers>
-            <debugger_info debugger="xdebug" debugger_version="3.3.2">
+            <debugger_info debugger="xdebug" debugger_version="3.5.3">
               <debug_extensions />
             </debugger_info>
           </debuggers>
@@ -73,6 +85,7 @@
             <extension name="Reflection" />
             <extension name="SPL" />
             <extension name="SimpleXML" />
+            <extension name="Zend OPcache" />
             <extension name="bcmath" />
             <extension name="ctype" />
             <extension name="curl" />
@@ -81,7 +94,6 @@
             <extension name="dom" />
             <extension name="fileinfo" />
             <extension name="filter" />
-            <extension name="ftp" />
             <extension name="gd" />
             <extension name="hash" />
             <extension name="iconv" />
@@ -96,6 +108,7 @@
             <extension name="pdo_mysql" />
             <extension name="pdo_sqlite" />
             <extension name="posix" />
+            <extension name="random" />
             <extension name="readline" />
             <extension name="session" />
             <extension name="sodium" />

@@ -1,0 +1,1 @@
+<p>El perímetro del Rectángulo cuya base es <?php echo $rectangleB?> y su altura <?php echo $rectangleH?>, es <?php echo $rectanglePerimeter?>. Por otro lado, su Área es <?php echo $rectangleArea?></p>

@@ -1,0 +1,1 @@
+<p>La edad de <?php echo $studentName?> es de <?php echo $studentAge?> años, su nota media es de <?php echo $studentAvgMark?></p>

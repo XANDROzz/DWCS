@@ -1,0 +1,172 @@
+<?php
+declare(strict_types=1);
+
+namespace Com\Daw2\Controllers;
+
+use Com\Daw2\Core\BaseController;
+use Com\Daw2\Models\AuxCountriesModel;
+use Com\Daw2\Models\AuxRolTrabajadorModel;
+use Com\Daw2\Models\TrabajadorModel;
+
+class TrabajadorController extends BaseController
+{
+    public function testDb()
+    {
+        $model = new TrabajadorModel();
+        $model->getTrabajadores();
+    }
+
+    public function getAllTrabajadores(): void
+    {
+        $data = array(
+            'titulo' => 'Todos los trabajadores',
+            'breadcrumb' => ['Inicio', 'Consultas simples'],
+        );
+        $model = new TrabajadorModel();
+        $data['trabajadores'] = $model->getAllTrabajadores();
+        $this->view->showViews(array('templates/header.view.php', 'querys/trabajadores.view.php', 'templates/footer.view.php'), $data);
+    }
+
+    public function getAllTrabajadoresOrdenadosSalario(): void
+    {
+        $data = array(
+            'titulo' => 'Todos los trabajadores ordenados',
+            'breadcrumb' => ['Inicio', 'Consultas simples'],
+        );
+        $model = new TrabajadorModel();
+        $data['trabajadores'] = $model->getAllTrabajadoresOrdenados();
+        $this->view->showViews(array('templates/header.view.php', 'querys/trabajadores.view.php', 'templates/footer.view.php'), $data);
+    }
+
+    public function getTrabajadores(): void
+    {
+        $data = array(
+            'titulo' => 'Listado trabajadores',
+            'breadcrumb' => ['Inicio', 'Trabajadores'],
+        );
+        $model = new TrabajadorModel();
+        $data['trabajadores'] = $model->getFilterBy($_GET);
+        $data['order'] = $model->getOrderIndex($_GET);
+        $data['currentPage'] = $model->getCurrentPage($_GET);
+        $data['maxPage'] = $model->getLastPage($_GET);
+        $auxTrabajadorRolModel = new AuxRolTrabajadorModel();
+        $data['roles'] = $auxTrabajadorRolModel->getAll();
+        $countriesModel = new AuxCountriesModel();
+        $data['countries'] = $countriesModel->getAll();
+        $input = filter_var_array($_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $data['input'] = $input;
+        //No modificamos la superglobal, la copiamos en $getOrder
+        $getOrder = $_GET;
+        $data['baseUrl'] = strtok($_SERVER['REQUEST_URI'] ?? '/', '?');
+        unset($getOrder['order']);
+        unset($getOrder['sentido']);
+        $data['queryParams'] = http_build_query($getOrder);
+
+        $getPage = $_GET;
+        unset($getPage['page']);
+        $data['queryParamsPage'] = http_build_query($getPage);
+        $this->view->showViews(array('templates/header.view.php', 'querys/trabajadores.view.php', 'templates/footer.view.php'), $data);
+    }
+
+    public function createTrabajador(): void
+    {
+        $data = array(
+            'titulo' => 'Listado trabajadores',
+            'breadcrumb' => ['Inicio', 'Trabajadores','Crear Trabajador'],
+        );
+        $errors = [];
+
+        $model = new TrabajadorModel();
+        $auxTrabajadorRolModel = new AuxRolTrabajadorModel();
+        $data['roles'] = $auxTrabajadorRolModel->getAll();
+        $countriesModel = new AuxCountriesModel();
+        $data['countries'] = $countriesModel->getAll();
+        $data['input'] = $_SERVER['REQUEST_METHOD'] === 'POST' ? $_POST : [];
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $errors = $this->checkNewTrabajador($_POST);
+            if(empty($errors)){
+               $model->newTrabajador($_POST);
+                header('Location: http://localhost:8080/trabajadores');
+                exit();
+            }
+        }
+        $data['errors'] = $errors;
+
+        $this->view->showViews(array('templates/header.view.php', 'querys/createTrabajador.view.php', 'templates/footer.view.php'), $data);
+    }
+
+    public function checkNewTrabajador(array $data): array
+    {
+        $errors = [];
+        if (empty($data['username'])) {
+            $errors['username'] = 'El username es un campo obligatorio';
+        }elseif (preg_match('/\d/', $data['username'])) {
+            $errors['username'] = 'El username no puede contener números';
+        }
+        if (empty($data['salarioBruto'])) {
+            $errors['salarioBruto'] = 'El salario es un campo obligatorio';
+        }elseif (!is_numeric($data['salarioBruto'])) {
+            $errors['salarioBruto'] = 'El salario bruto debe ser un numero';
+        }
+        if (empty($data['retencionIRPF'])) {
+            $errors['retencionIRPF'] = 'El nombre es un campo obligatorio';
+        }elseif (!is_numeric($data['retencionIRPF'])) {
+            $errors['retencionIRPF'] = 'El nombre es un campo obligatorio';
+        }
+        if (empty($data['id_rol'])) {
+            $errors['id_rol'] = 'El rol es un campo obligatorio';
+        }
+        if (empty($data['id_country'])) {
+            $errors['id_country'] = 'El país es un campo obligatorio';
+        }
+        return $errors;
+    }
+
+    public function getTrabajadorToEdit($username): void
+    {
+        $data = array(
+            'titulo' => 'Listado trabajadores',
+            'breadcrumb' => ['Inicio', 'Trabajadores','Editar Trabajador'],
+        );
+
+        $model = new TrabajadorModel();
+        $auxTrabajadorRolModel = new AuxRolTrabajadorModel();
+        $data['roles'] = $auxTrabajadorRolModel->getAll();
+        $countriesModel = new AuxCountriesModel();
+        $data['countries'] = $countriesModel->getAll();
+        $data['trabajador'] = $model->getTrabajadorToEdit($username);
+
+        $this->view->showViews(array('templates/header.view.php', 'querys/editTrabajador.view.php', 'templates/footer.view.php'), $data);
+    }
+
+    public function updateTrabajador($username): void
+    {
+        $data = array(
+            'titulo' => 'Listado trabajadores',
+            'breadcrumb' => ['Inicio', 'Trabajadores','Editar Trabajador'],
+        );
+
+        $model = new TrabajadorModel();
+        $trabajador = $model->getTrabajadorToEdit($username);
+        $camposForm=['username','salarioBruto','retencionIRPF','id_rol', 'id_country'];
+        $cambios = [];
+        foreach ($camposForm as $campo) {
+            if (isset($_POST[$campo]) && $_POST[$campo] != $trabajador[$campo]) {
+                $cambios[$campo] = $_POST[$campo];
+            }
+        }
+        if(!empty($cambios)){
+            $data['trabajador'] = $model->updateTrabajador($username, $cambios);
+        }
+        header('Location: /trabajadores/');
+        exit;
+    }
+
+    public function deleteTrabajador($username): void
+    {
+        $model = new TrabajadorModel();
+        $trabajador = $model->deleteTrabajador($username);
+        header('Location: /trabajadores/');
+    }
+}

@@ -1,0 +1,1 @@
+<p>Las unidades del número <?php echo $wholeNumber?> es <?php echo $thirdNumber?>, las decenas <?php echo $secondNumber?> y las centenas <?php echo $firstNumber?></p>

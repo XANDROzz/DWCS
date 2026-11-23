@@ -1,0 +1,1 @@
+<p>El perímetro del círculo de radio <?php echo $circleRadius?> es <?php echo $circlePerimeter?>, su Área es de <?php echo $circleArea?></p>

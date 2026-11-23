@@ -1,0 +1,1 @@
+<p><?= $secsToBeTransformed?> segundos se convierten en <?= floor($days)?> días, <?= floor($hours)?> horas, <?= floor($mins)?> minutos y <?= round($secs)?> segundos</p>
