@@ -466,6 +466,24 @@ class FrontController
         );
 
         Route::add(
+            '/cookies',
+            function () {
+                $controlador = new \Com\Daw2\Controllers\CookieController();
+                $controlador->showTheme();
+            },
+            'get'
+        );
+
+        Route::add(
+            '/cookies',
+            function () {
+                $controlador = new \Com\Daw2\Controllers\CookieController();
+                $controlador-> saveTheme();
+            },
+            'post'
+        );
+
+        Route::add(
             '/usuarios',
             function () {
                 $controlador = new \Com\Daw2\Controllers\UsuarioController();
