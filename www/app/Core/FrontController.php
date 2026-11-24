@@ -12,6 +12,8 @@ class FrontController
 {
     public static function main()
     {
+        session_start();
+
         Route::add(
             '/',
             function () {
@@ -488,6 +490,15 @@ class FrontController
             function () {
                 $controlador = new \Com\Daw2\Controllers\UsuarioController();
                 $controlador->getUsuarios();
+            },
+            'get'
+        );
+
+        Route::add(
+            '/login',
+            function () {
+                $controlador = new \Com\Daw2\Controllers\UsuarioController();
+                $controlador->login();
             },
             'get'
         );

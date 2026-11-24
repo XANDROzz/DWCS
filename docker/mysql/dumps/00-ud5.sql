@@ -2346,9 +2346,9 @@ CREATE TABLE `usuario_sistema` (
 --
 
 INSERT INTO `usuario_sistema` (`id_usuario`, `id_rol`, `email`, `pass`, `nombre`, `last_date`, `idioma`, `baja`) VALUES
-(1, 1, 'admin@test.org', '$2y$10$xT91VzjaschX37k0rX91G.PP2pocCDLUAQ1x5bQORrihEX4KsB1Du', 'Administrador', '2021-09-11 18:36:42', 'es', 0),
-(93, 1, 'admin2@test.org', '$2y$10$3Wh/w.vG8CNOhM.e3nSi6O8qS/4um.dgHiHQ4NwvKY5lB3i0Zvrtu', 'Test', NULL, 'es', 0),
-(94, 3, 'staff@test.org', '$2y$10$8Gsklks.aGGXPo610QZdTubq/KNgUR1xjbAljXZaYa1cdOfpPcTsa', 'Staff', NULL, 'es', 0);
+                                                                                                                     (1, 1, 'admin@test.org', '$2y$10$B60aaklpzlKcOfYFgyZ3dORA5DuC/NQ/KPeYH3GPApASoxR4sVfj2', 'Administrador', '2021-09-11 18:36:42', 'es', 0),
+                                                                                                                     (93, 2, 'auditor@test.org', '$2y$10$r6alHKkMSIhbHXPhBJI2SO8SnW5UKnnq1pzj0sPxiiFbXKjjPBxOS', 'Auditor', NULL, 'es', 0),
+                                                                                                                     (94, 3, 'facturacion@test.org', '$2y$10$xkT.DsE6LmsBvmdovdt0lu03doqOnaaDLp40W8W52zZGOQiQDloWS', 'Facturacion', NULL, 'es', 0);
 
 --
 -- Índices para tablas volcadas

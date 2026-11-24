@@ -36,4 +36,9 @@ class UsuarioController extends BaseController {
         $data['queryParamsPage'] = http_build_query($getPage);
         $this->view->showViews(array('templates/header.view.php', 'querys/usuarios.view.php', 'templates/footer.view.php'), $data);
     }
+
+    public function login(): void
+    {
+        $this->view->show('login.view.php');
+    }
 }
