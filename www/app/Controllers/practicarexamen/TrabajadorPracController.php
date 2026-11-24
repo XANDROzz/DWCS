@@ -19,9 +19,12 @@ class TrabajadorPracController extends BaseController
         $model = new TrabajadorPracModel();
         $auxRolEmpleadoModel = new AuxRolTrabajadorPracModel();
         $auxCountriesPracModel = new AuxCountriesPracModel();
-        $data['empleados'] = $model->selectTrabajadores($_POST);
         $data['emproles'] = $auxRolEmpleadoModel->getRoles();
         $data['empcountries'] = $auxCountriesPracModel->getCountries();
+        $data['empleados'] = $model->getTrabajadorByFilter($_GET);
+        $input = filter_var_array($_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $data['input'] = $input;
+
 
         $this->view->showViews(array('templates/header.view.php', 'querys/trabajadoresPrac.view.php', 'templates/footer.view.php'), $data);
     }

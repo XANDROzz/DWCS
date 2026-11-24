@@ -30,7 +30,11 @@ declare(strict_types=1);
                                 <label for="id_rol">Rol:</label>
                                 <select class="form-control select2" name="id_rol" id="id_rol">
                                     <option value="" disabled selected>-</option>
-                                    <!-- todo que salgan los roles -->
+                                    <?php foreach($emproles as $rol):  ?>
+                                    <option value="<?= $rol['id_rol']?>" <?= (isset($input['id_rol']) && $rol['id_rol'] === (int)$input['id_rol']) ? 'selected' : '' ?>>
+                                        <?= ucfirst($rol['nombre_rol']) ?>
+                                    </option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
@@ -66,7 +70,11 @@ declare(strict_types=1);
                             <div class="mb-3">
                                 <label for="id_country">País:</label>
                                 <select class="form-control select2" multiple name="id_country[]" id="id_country">
-                                    <!-- todo mostrar todos los países -->
+                                    <?php foreach($empcountries as $country): ?>
+                                    <option value="<?= $country['id'] ?>" <?= (isset($input['id_country']) && $country['id'] === $input['id_country']) ? 'selected' : '' ?>>
+                                        <?= ucfirst($country['country_name']) ?>
+                                    </option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
@@ -102,9 +110,9 @@ declare(strict_types=1);
                 <table class="table table-striped" id="tabladatos">
                     <tr>
                         <td>Nombre</td>
+                        <td>Rol</td>
                         <td>Salario Bruto</td>
                         <td>Retención</td>
-                        <td>Rol</td>
                         <td>País</td>
                         <td>Acciones</td>
                     </tr>

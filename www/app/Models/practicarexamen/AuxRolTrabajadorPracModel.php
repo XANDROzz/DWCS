@@ -11,6 +11,6 @@ class AuxRolTrabajadorPracModel extends BaseDbModel
 
     public function getRoles(): array
     {
-        return $this->pdo->query(self::SELECT_ROLES)->fetchAll();
+        return $this->pdo->query(self::SELECT_ROLES)->fetchAll(PDO::FETCH_ASSOC);
     }
 }
