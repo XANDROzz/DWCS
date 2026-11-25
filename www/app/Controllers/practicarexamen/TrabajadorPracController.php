@@ -25,7 +25,28 @@ class TrabajadorPracController extends BaseController
         $input = filter_var_array($_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $data['input'] = $input;
 
+        $data['baseUrl'] = strtok($_SERVER['REQUEST_URI'] ?? '/', '?');
+
+        $getOrder = $_GET;
+        unset($getOrder['order']);
+        $queryParams = http_build_query($getOrder);
+        $extra = $queryParams !== '' ? '&' . $queryParams : '';
+        $data['extra'] = $extra;
+        $data['nextOrders'] = $nextOrders = [
+            'nombre'    => $model->getNextOrder(1, $_GET),
+            'rol'       => $model->getNextOrder(2, $_GET),
+            'salario'   => $model->getNextOrder(3, $_GET),
+            'retencion' => $model->getNextOrder(4, $_GET),
+            'pais'      => $model->getNextOrder(5, $_GET),
+        ];
+
+        $data['curPage'] = $model->getCurrentPage($_GET);
+        $data['mxPage'] = $model->getLastPage();
+        $getPage = $_GET;
+        unset($getPage['page']);
+        $data['queryParamsPage'] = http_build_query($getPage);
 
         $this->view->showViews(array('templates/header.view.php', 'querys/trabajadoresPrac.view.php', 'templates/footer.view.php'), $data);
     }
+
 }

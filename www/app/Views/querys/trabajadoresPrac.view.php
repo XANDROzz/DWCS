@@ -109,12 +109,12 @@ declare(strict_types=1);
             <div class="card-body" id="card-table">
                 <table class="table table-striped" id="tabladatos">
                     <tr>
-                        <td>Nombre</td>
-                        <td>Rol</td>
-                        <td>Salario Bruto</td>
-                        <td>Retención</td>
-                        <td>País</td>
-                        <td>Acciones</td>
+                        <th><a href="<?= $baseUrl ?>?order=<?= $nextOrders['nombre'] . $extra ?>">Nombre</a></th>
+                        <th><a href="<?= $baseUrl ?>?order=<?= $nextOrders['rol'] . $extra ?>">Rol</a></th>
+                        <th><a href="<?= $baseUrl ?>?order=<?= $nextOrders['salario'] . $extra ?>">Salario Bruto</a></th>
+                        <th><a href="<?= $baseUrl ?>?order=<?= $nextOrders['retencion'] . $extra ?>">Retención</a></th>
+                        <th><a href="<?= $baseUrl ?>?order=<?= $nextOrders['pais'] . $extra ?>">País</a></th>
+                        <th>Acciones</th>
                     </tr>
                     <tbody>
                         <?php foreach ($empleados as $empleado) : ?>
@@ -148,6 +148,49 @@ declare(strict_types=1);
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+            </div>
+            <div class="card-footer">
+                <nav aria-label="Navegacion por paginas">
+                    <ul class="pagination justify-content-center">
+                        <?php
+                        if ($curPage !== 1):
+                            ?>
+                            <li class="page-item">
+                                <a class="page-link" href="<?php echo $baseUrl ?>?page=1<?php echo ($queryParamsPage !== '' ? "&$queryParamsPage" : '') ?>" aria-label="First">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">First</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="<?php echo $baseUrl ?>?page=<?php echo ($curPage - 1) . ($queryParamsPage !== '' ? "&$queryParamsPage" : '')?>" aria-label="Previous">
+                                    <span aria-hidden="true">&lt;</span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+                        <?php
+                        endif;
+                        ?>
+                        <li class="page-item active"><a class="page-link" href="#"><?php echo $curPage ?></a></li>
+                        <?php
+                        if ($mxPage > $curPage):
+                            ?>
+                            <li class="page-item">
+                                <a class="page-link" href="<?php echo $baseUrl ?>?page=<?php echo ($curPage + 1) . ($queryParamsPage !== '' ? "&$queryParamsPage" : '')?>" aria-label="Next">
+                                    <span aria-hidden="true">&gt;</span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="<?php echo $baseUrl ?>?page=<?php echo $mxPage . ($queryParamsPage !== '' ? "&$queryParamsPage" : '')?>" aria-label="Last">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Last</span>
+                                </a>
+                            </li>
+                        <?php
+                        endif;
+                        ?>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
