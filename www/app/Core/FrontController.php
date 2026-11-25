@@ -495,12 +495,48 @@ class FrontController
         );
 
         Route::add(
+            '/usuarios/edit/([a-zA-Z0-9_-]+)', function($id_usuario)
+        {
+            $controlador = new \Com\Daw2\Controllers\UsuarioController();
+            $controlador->getUsuarioToEdit($id_usuario);
+        },
+            'get'
+        );
+
+        Route::add(
+            '/usuarios/edit/([a-zA-Z0-9_-]+)', function($id_usuario)
+        {
+            $controlador = new \Com\Daw2\Controllers\UsuarioController();
+            $controlador->updateUsuario($id_usuario);
+        },
+            'post'
+        );
+
+        Route::add(
+            '/usuarios/delete/([a-zA-Z0-9_-]+)', function($id_usuario)
+        {
+            $controlador = new \Com\Daw2\Controllers\UsuarioController();
+            $controlador->deleteUsuarios($id_usuario);
+        },
+            'get'
+        );
+
+        Route::add(
             '/login',
             function () {
                 $controlador = new \Com\Daw2\Controllers\UsuarioController();
                 $controlador->login();
             },
             'get'
+        );
+
+        Route::add(
+            '/login',
+            function () {
+                $controlador = new \Com\Daw2\Controllers\UsuarioController();
+                $controlador->doLogin();
+            },
+            'post'
         );
 
         Route::pathNotFound(

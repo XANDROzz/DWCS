@@ -7,9 +7,11 @@ use Com\Daw2\Models\RolUsuarioModel;
 use Com\Daw2\Models\TrabajadorModel;
 use Com\Daw2\Models\UsuarioModel;
 
-class UsuarioController extends BaseController {
+class UsuarioController extends BaseController
+{
 
-    public function getUsuarios(){
+    public function getUsuarios()
+    {
         $data = array(
             'titulo' => 'Todos los Usuarios',
             'breadcrumb' => ['Inicio', 'Consultas simples'],
@@ -37,8 +39,44 @@ class UsuarioController extends BaseController {
         $this->view->showViews(array('templates/header.view.php', 'querys/usuarios.view.php', 'templates/footer.view.php'), $data);
     }
 
-    public function login(): void
+    public function login(bool $error = false): void
     {
-        $this->view->show('login.view.php');
+        $this->view->show('login.view.php', ['error' => $error]);
+    }
+
+    public function doLogin(): void
+    {
+        $error = false;
+        if(!empty($_POST['email']) && !empty($_POST['pass'])){
+            $email = $_POST['email'];
+            $password = $_POST['pass'];
+            $usuario = (new UsuarioModel())->getByEmail($email);
+            if($usuario !== false && password_verify($password, $usuario['pass'])) {
+                session_regenerate_id(true);
+                $_SESSION['usuario'] = $usuario;
+            } else {
+                $error = true;
+            }
+        } else {
+            $error = true;
+        }
+        if(!$error) {
+            header('Location: /');
+        } else {
+            $this->login(true);
+        }
+    }
+
+    public function getUsuarioToEdit($id_usuario): void
+    {
+        $data = array(
+            'titulo' => 'Todos los Usuarios',
+            'breadcrumb' => ['Inicio', 'Consultas simples'],
+        );
+
+        $model = new UsuarioModel();
+        $model->selectUsuarioToEdit($id_usuario);
+
+        $this->view->showViews(array('templates/header.view.php', 'querys/editUsuarios.view.php', 'templates/footer.view.php'), $data);
     }
 }

@@ -2345,6 +2345,10 @@ CREATE TABLE `usuario_sistema` (
 -- Volcado de datos para la tabla `usuario_sistema`
 --
 
+
+
+--Password = TestTest1.
+
 INSERT INTO `usuario_sistema` (`id_usuario`, `id_rol`, `email`, `pass`, `nombre`, `last_date`, `idioma`, `baja`) VALUES
                                                                                                                      (1, 1, 'admin@test.org', '$2y$10$B60aaklpzlKcOfYFgyZ3dORA5DuC/NQ/KPeYH3GPApASoxR4sVfj2', 'Administrador', '2021-09-11 18:36:42', 'es', 0),
                                                                                                                      (93, 2, 'auditor@test.org', '$2y$10$r6alHKkMSIhbHXPhBJI2SO8SnW5UKnnq1pzj0sPxiiFbXKjjPBxOS', 'Auditor', NULL, 'es', 0),

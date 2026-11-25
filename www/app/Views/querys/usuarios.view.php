@@ -84,7 +84,7 @@
             <?php
             require_once '../app/Helpers/form_helper.php';
             echo printTableHeader(
-                    ['Nombre', 'Rol', 'Email', 'Idioma', 'Fecha', 'Acciones'],
+                    ['Nombre', 'Email', 'Rol', 'Idioma', 'Fecha', 'Acciones'],
                     $order,
                     $input['sentido'] ?? null,
                     $queryParams
@@ -98,16 +98,16 @@
             <td><?php echo $usuario['nombre'] ?></td>
             <td><?php echo $usuario['email'] ?></td>
             <td><?php echo $usuario['rol'] ?></td>
-            <td><?php echo $usuario['last_date'] ?></td>
             <td><?php echo $usuario['idioma'] ?></td>
+            <td><?php echo $usuario['last_date'] ?></td>
             <td>
-                <a class="btn btn-success btn-sm">
+                <a class="btn btn-success btn-sm" href="/usuarios/edit/">
                     <i class="fa-solid fas fa-edit"></i>
                 </a>
                 <a class="btn btn-primary btn-sm">
                     <i class="fa-solid fas fa-cannabis"></i>
                 </a>
-                <a class="btn btn-danger btn-sm">
+                <a class="btn btn-danger btn-sm" href="/usuarios/delete/">
                     <i class="fa-solid fas fa-trash"></i>
                 </a>
             </td>

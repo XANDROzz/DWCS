@@ -14,6 +14,8 @@ class UsuarioModel extends BaseDbModel {
     private const array ORDER_FIELDS = ["us.nombre", "us.id_rol", "us.email", "us.idioma", "us.last_date"];
     private const string SELECT_FROM = "SELECT us.nombre, ar.rol, us.email, us.idioma, us.last_date, us.baja FROM usuario_sistema us LEFT JOIN aux_rol ar ON us.id_rol = ar.id_rol";
 
+    private const string SELECT_FROM_PASS = "SELECT us.nombre, ar.rol, us.email, us.idioma, us.last_date, us.baja, us.pass FROM usuario_sistema us LEFT JOIN aux_rol ar ON us.id_rol = ar.id_rol";
+
     private const string SELECT_COUNT_FROM = "SELECT COUNT(*) FROM usuario_sistema us LEFT JOIN aux_rol ar ON us.id_rol = ar.id_rol";
 
     public function getAllUsuarios(): array {
@@ -108,5 +110,24 @@ class UsuarioModel extends BaseDbModel {
             return (int)$filtros['order'];
         }
     }
+
+    public function getByEmail(string $email): false|array
+    {
+        $sql = self::SELECT_FROM_PASS . " WHERE email = :email";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['email' => $email]);
+        return $stmt->fetch();
+    }
+
+    public function selectUsuarioToEdit($id_usuario)
+    {
+        $sql = self::SELECT_FROM . " WHERE id_usuario = :id_usuario";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['id_usuario' => $id_usuario]);
+        $row = $stmt->fetch();
+        return $row;
+    }
+
+
 
 }
