@@ -1,9 +1,3 @@
-<?php
-
-declare(strict_types=1);
-
-?>
-
 <!-- Inicio de mi html -->
 <div class="row">
     <div class="col-12">
@@ -22,7 +16,7 @@ declare(strict_types=1);
                         <div class="col-12 col-lg-3">
                             <div class="mb-3">
                                 <label for="username">Username:</label>
-                                <input type="text" class="form-control" name="username" id="username" value="">
+                                <input type="text" class="form-control" name="username" id="username" value="" placeholder="Josema">
                             </div>
                         </div>
                         <div class="col-12 col-lg-3">
@@ -136,10 +130,10 @@ declare(strict_types=1);
                             </td>
                             <td class="px-4 py-2">
                                 <div class="d-flex align-items-center gap-3">
-                                    <a href="/trabajadores/edit/" class="btn btn-success btn">
+                                    <a href="/trabajadores-practice/edit/<?= urlencode($empleado['username']) ?>" class="btn btn-success btn">
                                         <i class="fa-solid fas fa-edit"></i>
                                     </a>
-                                    <a href="/trabajadores/delete/" class="btn btn-danger btn">
+                                    <a href="/trabajadores-practice/delete/<?= urlencode($empleado['username']) ?>" class="btn btn-danger btn">
                                         <i class="fa-solid fas fa-trash"></i>
                                     </a>
                                 </div>

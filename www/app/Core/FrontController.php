@@ -468,6 +468,54 @@ class FrontController
         );
 
         Route::add(
+            '/trabajadores-practice/new',
+            function()
+            {
+                $controller = new \Com\Daw2\Controllers\practicarexamen\TrabajadorPracController();
+                $controller->createTrabajador();
+            },
+            'get'
+        );
+
+        Route::add(
+            '/trabajadores-practice/new',
+            function()
+            {
+                $controller = new \Com\Daw2\Controllers\practicarexamen\TrabajadorPracController();
+                $controller->createTrabajador();
+            },
+            'post'
+        );
+
+        Route::add(
+            '/trabajadores-practice/edit/([a-zA-Z0-9_-]+)', function($username)
+        {
+            $controlador = new \Com\Daw2\Controllers\practicarexamen\TrabajadorPracController();
+            $controlador->getTrabajadorToEdit($username);
+        },
+            'get'
+        );
+
+        Route::add(
+            '/trabajadores-practice/edit/([a-zA-Z0-9_-]+)', function($username)
+        {
+            $controlador = new \Com\Daw2\Controllers\practicarexamen\TrabajadorPracController();
+            $controlador->updateTrabajador($username);
+        },
+            'post'
+        );
+
+        Route::add(
+            '/trabajadores-practice/delete/([a-zA-Z0-9_-]+)', function($username)
+        {
+            $controlador = new \Com\Daw2\Controllers\practicarexamen\TrabajadorPracController();
+            $controlador->deleteTrabajador($username);
+        },
+            'get'
+        );
+
+
+        Route::add(
             '/cookies',
             function () {
                 $controlador = new \Com\Daw2\Controllers\CookieController();
